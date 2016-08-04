@@ -1,31 +1,18 @@
 var apiKey = "br263217536383875054898079171468";
 
-
-function City(cityName, state, country, cityId) {
-  this.cityName = name;
-  this.state =state;
-  this.country = country;
-  this.cityId  = cityId;
-}
+var allOriginLocations = [];
+var allDestLocations = [];
+var origin;
+var destination;
 
 
-var allOriginLocations;
-
-
-var locationPhraseAll = function(cityName, state, country){
-  var locationPhrase = cityName;
-  if(state !== "" )
+var showDoneButton = function(){
+  if(origin !== undefined && destination !== undefined)
   {
-    locationPhrase += ", " + state;
-  }
-  if(state !== "United States")
-  {
-    locationPhrase += ", " + country;
+    $(".locDone").show();
   }
 };
-
-
-var getLocation = function(responseName, city, id, selectId, id2){
+var getLocation = function(city, id, selectId, id2, which){
   $.get('http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/US/USD/en-US?query=' + city + '&apiKey='+ apiKey, function(response) {
     var allLocations = "";
     if(response.Places.length === 0)
@@ -37,7 +24,8 @@ var getLocation = function(responseName, city, id, selectId, id2){
         var state = response.Places[i].RegionId;
         var country = response.Places[i].CountryName;
         var cityId = response.Places[i].PlaceId;
-
+        var allCityInfo= [];
+        allCityInfo.push(cityName, state, country, cityId);
         var locationPhrase = cityName;
         if(state !== "" )
         {
@@ -47,8 +35,15 @@ var getLocation = function(responseName, city, id, selectId, id2){
         {
           locationPhrase += ", " + country;
         }
-
+        allCityInfo.push(locationPhrase);
         allLocations += "<option value='" + i + "'>" + locationPhrase + "</option>";
+        if(which == "origin"){
+        allOriginLocations.push(allCityInfo);
+      } else {
+        {
+          allDestLocations.push(allCityInfo);
+        }
+      }
 
       }
 
@@ -60,38 +55,53 @@ var getLocation = function(responseName, city, id, selectId, id2){
   });
 };
 $(document).ready(function() {
-  var origin;
-  var originId;
-  var destinationId;
 
 
 
   $('#originLocCheck').submit(function(event) {
     event.preventDefault();
-    origin = $('#originLoc').val();
-    getLocation("allOriginLocations", origin, "#originQ", "originCities", "#originChoiceIntro");
+    var city = $('#originLoc').val();
+    getLocation(city, "#originQ", "originCities", "#originChoiceIntro", "origin");
     $(".originQ").show();
+    $("#originFinal").hide();
+    $(".locDone").hide();
+    console.log(origin);
   });
 
   $('#destLocCheck').submit(function(event) {
     event.preventDefault();
     var city = $('#destLoc').val();
-    getLocation(city, "#destQ");
+    getLocation(city, "#destQ", "destCities", "#destChoiceIntro", "dest");
+    $(".destQ").show();
+    $("#destFinal").hide();
+    $(".locDone").hide();
+    console.log(destination);
   });
 
   $('.originCities').submit(function(event) {
     event.preventDefault();
     originNumber = $('#originCities').val();
-    console.log(originNumber);
+    origin = allOriginLocations[originNumber][3];
+    console.log(origin);
+    showDoneButton();
     $(".originQ").hide();
-    console.log(allOriginLocations);
-    var originPhrase = locationPhraseAll(allOriginLocations.Places[originNumber].PlaceName, allOriginLocations.Places[originNumber].Places[i].RegionId, allOriginLocations.Places[originNumber].CountryName);
-    $("#originFinal").prepend("<h3>You are traveling from " + originPhrase);
+    $("#originFinal").empty().prepend("<h3>You are traveling from " + allOriginLocations[originNumber][4]);
+    $("#originFinal").show();
   });
 
   $('.destCities').submit(function(event) {
     event.preventDefault();
-    deId = $('#destCities').val();
-    console.log(originId);
+    destNumber = $('#destCities').val();
+    destination = allDestLocations[destNumber][3];
+    console.log(destination);
+    showDoneButton();
+    $(".destQ").hide();
+    $("#destFinal").empty().prepend("<h3>You are traveling from " + allDestLocations[destNumber][4]);
+    $("#destFinal").show();
+  });
+  $('#locDone').click(function() {
+    $.get('http://http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/USD/en-US/PDX/LOND/anytime/anytime?apiKey='+ apiKey, function(response) {
+      console.log(response);
+    });
   });
 });

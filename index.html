@@ -13,7 +13,7 @@
     <div class="origin">
       <form id="originLocCheck" >
       <label for="originLoc">Where will we start?</label>
-      <input id="originLoc" type="text" value="Portland">
+      <input id="originLoc" type="text" value="Portland" required="">
       <button type="submit" class="button">Submit</button>
     </form>
     </div>
@@ -29,10 +29,22 @@
     <div class="dest">
       <form id="destLocCheck" >
         <label for="destLoc">Where will we end up?</label>
-        <input id="destLoc" type="text" required="">
+        <input id="destLoc" type="text" value="london" required="">
         <button type="submit" class="button">Submit</button>
       </form>
-      <div id="destQ"></div>
+    </div>
+    <div class="destQ">
+      <h3 id="destChoiceIntro"></h3>
+      <form class="destCities">
+        <div id="destQ"></div>
+        <button type="submit" class="button">Submit</button>
+      </form>
+    </div>
+    <br>
+    <div id="destFinal"></div>
+    <div class="locDone">
+      <br>
+      <button class="button" id="locDone">Submit Locations</button>
     </div>
   </body>
 </html>
