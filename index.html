@@ -5,17 +5,34 @@
     <script src="build/js/vendor.min.js"></script>
     <link rel="stylesheet" href="build/css/vendor.css">
     <script type="text/javascript" src="build/js/app.js"></script>
+    <link rel="stylesheet"  href="styles.css">
     <title>Let's go!</title>
   </head>
   <body>
-    <h1>Where can you travel today?</h1>
-    <label for="originLoc">Where will we start?</label>
-    <input id="originLoc" type="text" value="Portland">
-    <button class="button" id="originLocCheck">Submit</button>
-    <div id="showOriginLoc"></div>
+    <h1>Where will you travel today?</h1>
+    <div class="origin">
+      <form id="originLocCheck" >
+      <label for="originLoc">Where will we start?</label>
+      <input id="originLoc" type="text" value="Portland">
+      <button type="submit" class="button">Submit</button>
+    </form>
+    </div>
+    <div class="originQ">
+      <h3 id="originChoiceIntro"></h3>
+      <form class="originCities">
+          <div id="originQ"></div>
+        <button type="submit" class="button">Submit</button>
+      </form>
+    </div>
+    <div id="originFinal"></div>
     <br>
-    <label for="destLoc">Where will we end up?</label>
-    <input id="destLoc" type="text">
-    <button class="button" id="destLocCheck">Submit</button>
+    <div class="dest">
+      <form id="destLocCheck" >
+        <label for="destLoc">Where will we end up?</label>
+        <input id="destLoc" type="text" required="">
+        <button type="submit" class="button">Submit</button>
+      </form>
+      <div id="destQ"></div>
+    </div>
   </body>
 </html>
