@@ -1,0 +1,37 @@
+Object
+Places
+:
+Array[3]
+
+CityId:"PDXA-sky"
+CountryId:"US-sky"
+CountryName:"United States"
+PlaceId:"PDX-sky"
+PlaceName:"Portland"
+RegionId:"OR"
+
+Reponse Second Api
+Object {Quotes: Array[40], Places: Array[4], Carriers: Array[10], Currencies: Array[1]}
+Carriers:Array[10]
+Currencies:Array[1]
+Places:Array[4]
+Quotes:Array[40]
+0:Object
+Direct:false
+>InboundLeg:
+Object
+CarrierIds:Array[0]
+DepartureDate:"2016-08-30T00:00:00"
+DestinationId:74728
+OriginId:65698
+>__proto__:Object
+MinPrice:681
+
+>OutboundLeg:Object
+CarrierIds:Array[1]
+DepartureDate:"2016-08-27T00:00:00"
+DestinationId:65698
+OriginId:74728
+>__proto__:Object
+QuoteDateTime:"2016-07-29T22:32:00"
+QuoteId:1

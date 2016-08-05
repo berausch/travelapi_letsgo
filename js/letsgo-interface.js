@@ -100,7 +100,7 @@ $(document).ready(function() {
     $("#destFinal").show();
   });
   $('#locDone').click(function() {
-    $.get('http://http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/USD/en-US/PDX/LOND/anytime/anytime?apiKey='+ apiKey, function(response) {
+    $.get('http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/USD/en-US/' + origin + '/' + destination + '/anytime/anytime?apiKey='+ apiKey, function(response) {
       console.log(response);
     });
   });
